@@ -18,6 +18,7 @@ export default class McController {
     }
 
     public createPlayer = async (req: Request, res: Response) => {
+        console.log(req.body);
         const { username, deaths, uuid } = req.body;
         const player = await Player.create({ uuid, username, deaths });
         return player;
