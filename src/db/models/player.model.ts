@@ -2,6 +2,7 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 
 interface PlayerAttributes {
     id: number;
+    uuid: string;
     username: string;
     deaths: number; // Store inventory as a JSON string or use a JSON type if supported
 }
@@ -10,6 +11,7 @@ export type PlayerCreationAttributes = Optional<PlayerAttributes, 'id'>;
 
 class Player extends Model<PlayerAttributes, PlayerCreationAttributes> implements PlayerAttributes {
     public id!: number;
+    public uuid!: string;
     public username!: string;
     public deaths!: number;
 
@@ -19,6 +21,10 @@ class Player extends Model<PlayerAttributes, PlayerCreationAttributes> implement
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true
+            },
+            uuid: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             username: {
                 type: DataTypes.STRING,
