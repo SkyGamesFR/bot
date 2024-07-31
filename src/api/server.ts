@@ -3,23 +3,31 @@ import express, { Express } from 'express';
 import morgan from 'morgan';
 import ConfigManager from '@/config/config';
 import createLogger from '@/utils/logger'
+import routes from './routes';
 
 export default class BotApi {
-    private app: Express;
     private server: http.Server;
-    private config: ConfigManager;
+    private configManager: ConfigManager;
     logger = createLogger("%c[API]", "color: #a02d2a;");
+    public app: express.Application;
 
     constructor() {
         this.app = express();
-        this.app.use(morgan('dev'));
-        this.server = http.createServer(this.app);
-        this.config = new ConfigManager();
+        this.configManager = new ConfigManager();
+        this.config();
     }
 
-    start() {
-        this.server.listen(this.config.getConfig().api.port, () => {
-            this.logger.log(`API is running on port ${this.config.getConfig().api.port}`)
+    public config(): void {
+        this.app.set('port', this.configManager.getConfig().api.port);
+        this.app.use(express.json());
+        this.app.use(morgan('dev'));
+        this.app.use(express.urlencoded({ extended: false }));
+        routes(this.app)
+    }
+
+    public start(): void {
+        this.app.listen(this.app.get('port'), () => {
+            console.log('Server listening in port 3000');
         });
     }
 }

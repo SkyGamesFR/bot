@@ -21,11 +21,15 @@ export default class ConfigManager {
         debug: false,
         db: {
             provider: "mysql",
+            fileName: "database.sqlite",
             database: "database",
             host: "localhost",
             user: "root",
             password: "password",
             port: 3306,
+        },
+        mc: {
+            rouletteChannel: "ROULETTE_CHANNEL_ID",
         },
         discord: {
             guillMemberRoleId: "MEMBER_ROLE_ID",

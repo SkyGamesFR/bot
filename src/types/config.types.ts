@@ -9,6 +9,7 @@ export interface APIConfig {
 
 export interface DB {
     provider: string;
+    fileName: string;
     host: string;
     port: number;
     user: string;
@@ -21,6 +22,10 @@ export interface Discord {
     guildWelcomeChannelId: string;
 }
 
+export interface MC {
+    rouletteChannel: string;
+}
+
 export interface Config {
     prefix: string;
     style: string;
@@ -28,6 +33,7 @@ export interface Config {
     clientId: string;
     debug: boolean;
     db: DB;
+    mc: MC;
     api: APIConfig;
     discord: Discord
 }
