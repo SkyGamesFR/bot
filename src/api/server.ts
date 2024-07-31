@@ -22,7 +22,7 @@ export default class BotApi {
         this.app.set('port', this.configManager.getConfig().api.port);
         this.app.use(express.json());
         this.app.use(morgan('dev'));
-        this.app.use(bodyParser.json());
+        this.app.use(bodyParser);
         this.app.use(express.urlencoded({ extended: false }));
         routes(this.app)
     }
