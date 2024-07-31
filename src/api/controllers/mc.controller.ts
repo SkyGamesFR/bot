@@ -18,10 +18,23 @@ export default class McController {
     }
 
     public createPlayer = async (req: Request, res: Response) => {
-        console.log(req.body);
-        const { username, deaths, uuid } = req.body;
-        const player = await Player.create({ uuid, username, deaths });
-        return player;
+        const { username, uuid, deaths } = req.body;
+
+        if (!username || !uuid) {
+            return res.status(400).json({ error: 'username and uuid are required' });
+        }
+
+        try {
+            const player = await Player.create({
+                username: username,
+                uuid: uuid,
+                deaths: deaths
+            });
+            res.status(200).json(player);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Failed to create player' });
+        }
     };
 
     public deletePlayer(req: Request, res: Response): void {
