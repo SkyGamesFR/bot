@@ -15,8 +15,9 @@ export default class McRoutes {
    // remplace my example routes and controller methods for your own 
     protected registerRoutes(): void {
         this.router.get('/', this.controller.getPlayers);
-        this.router.post('/create', this.controller.createPlayer);
+        this.router.post('/', this.controller.createPlayer);  // Ensure this matches your POST request URL
         this.router.delete('/:uuid', this.controller.deletePlayer);
         this.router.post('/playerDied', this.controller.playerDied);
     }
+
 }
