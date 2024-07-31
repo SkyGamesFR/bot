@@ -14,15 +14,12 @@ export default class McController {
     }
 
     public getPlayers(req: Request, res: Response): void {
-        
+        res.json({ message: 'getPlayers' });
     }
 
     public createPlayer = async (req: Request, res: Response) => {
-        const { username, inventory } = req.body;
-        const player = await Player.findOrCreate({
-            where: { username },
-            defaults: { inventory }
-        });
+        const { username, deaths } = req.body;
+        const player = await Player.create({ username, deaths });
         return player;
     };
 

@@ -3,7 +3,7 @@ import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 interface PlayerAttributes {
     id: number;
     username: string;
-    inventory: string; // Store inventory as a JSON string or use a JSON type if supported
+    deaths: number; // Store inventory as a JSON string or use a JSON type if supported
 }
 
 export type PlayerCreationAttributes = Optional<PlayerAttributes, 'id'>;
@@ -11,7 +11,7 @@ export type PlayerCreationAttributes = Optional<PlayerAttributes, 'id'>;
 class Player extends Model<PlayerAttributes, PlayerCreationAttributes> implements PlayerAttributes {
     public id!: number;
     public username!: string;
-    public inventory!: string;
+    public deaths!: number;
 
     static initModel(sequelize: Sequelize) {
         Player.init({
@@ -24,8 +24,8 @@ class Player extends Model<PlayerAttributes, PlayerCreationAttributes> implement
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            inventory: {
-                type: DataTypes.JSON, // Use JSON type to store inventory
+            deaths: {
+                type: DataTypes.INTEGER, // Use JSON type to store inventory
                 allowNull: true
             }
         }, {
